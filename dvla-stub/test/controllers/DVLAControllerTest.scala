@@ -1,26 +1,16 @@
 package controllers
 
+import helpers.FileHelper
 import org.scalatest.{Matchers, WordSpec}
 import play.api.libs.json.{Format, JsObject, JsString, Json}
 import play.api.test._
 import play.api.test.Helpers._
+import models.{Penalties, Penalty}
 
 import scala.io.Source
 /**
   * Created by rob on 11/10/16.
   */
-
-case class Penalty(points: Int, offence: String)
-case class Penalties(id: String, penalties: List[Penalty])
-
-object Penalties {
-  implicit val formats: Format[Penalties] = Json.format[Penalties]
-}
-
-object Penalty {
-  implicit val formats: Format[Penalty] = Json.format[Penalty]
-}
-
 
 class DVLAControllerTest extends WordSpec with Matchers {
 
@@ -28,11 +18,7 @@ class DVLAControllerTest extends WordSpec with Matchers {
 
   val testClass = new DVLAController
 
-  def readTestFile(id: String) : String = {
-    val resource = getClass.getResourceAsStream(s"/resources/penalties/${id}.json")
-    try Source.fromInputStream(resource).mkString.toString
-    finally resource.close()
-  }
+
 
   "Get penalities" should {
 
@@ -42,7 +28,7 @@ class DVLAControllerTest extends WordSpec with Matchers {
 
       status(response) shouldBe 200
 
-      contentAsJson(response) shouldBe Json.parse(readTestFile("vinnie"))
+      contentAsJson(response) shouldBe Json.parse(FileHelper.readTestFile("penalties","vinnie"))
 
       val parsedResponse = contentAsJson(response).as[Penalties]
 

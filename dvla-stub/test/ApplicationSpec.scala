@@ -1,4 +1,7 @@
+import helpers.FileHelper
+import models.{Penalties, Penalty}
 import org.scalatestplus.play._
+import play.api.libs.json.Json
 import play.api.test._
 import play.api.test.Helpers._
 
@@ -7,7 +10,7 @@ import play.api.test.Helpers._
  * You can mock out a whole application including requests, plugins etc.
  * For more information, consult the wiki.
  */
-class ApplicationSpec extends PlaySpec with OneAppPerTest {
+class ApplicationSpec extends PlaySpec with OneAppPerTest  {
 
   "Routes" should {
 
@@ -39,4 +42,12 @@ class ApplicationSpec extends PlaySpec with OneAppPerTest {
 
   }
 
+  "DVLA Controller" should {
+
+    "return 3 points for vinnie" in {
+      val response = route(app, FakeRequest(GET, "/penalties/vinnie")).get
+
+      contentAsJson(response) mustBe Json.parse(FileHelper.readTestFile("penalties","vinnie"))
+    }
+  }
 }
