@@ -4,6 +4,10 @@
     {
       "points": 3,
       "offence": "speeding"
+    },
+    {
+      "points": 3,
+      "offence": "jumping the lights"
     }
   ]
 }

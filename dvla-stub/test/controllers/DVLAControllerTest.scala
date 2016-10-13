@@ -24,15 +24,15 @@ class DVLAControllerTest extends WordSpec with Matchers {
 
     "return response from the file for supplied id" in {
 
-      val response = testClass.penalties("vinnie")(request)
+      val response = testClass.penalties("martin")(request)
 
       status(response) shouldBe 200
 
-      contentAsJson(response) shouldBe Json.parse(FileHelper.readTestFile("penalties","vinnie"))
+      contentAsJson(response) shouldBe Json.parse(FileHelper.readTestFile("penalties","martin"))
 
       val parsedResponse = contentAsJson(response).as[Penalties]
 
-      parsedResponse shouldBe Penalties(id = "vinnie", penalties = List(Penalty(points = 3, offence = "speeding")))
+      parsedResponse shouldBe Penalties(id = "martin", penalties = List(Penalty(points = 3, offence = "speeding")))
 
     }
 
