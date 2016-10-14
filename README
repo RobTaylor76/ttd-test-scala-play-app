@@ -1,0 +1,33 @@
+TDD Exercise
+
+
+Front End
+=========
+as a user i want to enter and id (name) and be shown the total number of penalty points that person has.
+
+MVP 	-> A url with and ID as param
+	-> gets data from the backend service {host:port}/penalties/{id}
+	-> html page containing "{name} has {x} points"  
+Iteration 1 -> a Page that allows users to enter the Id and press a submit button to be shown the same html page from MVP
+
+
+
+Stub DVLA-Service for testing purposes
+======================================
+
+Exposes   url -> /penalties/{id}
+Has example data for three ids   rob/martin/vinnie
+The test data for these users in dvlas-stub/conf/resources/penalties
+
+
+Example Json Format
+===================
+{
+  "id": "unique_id",
+  "penalties": [
+    {
+      "points": 3,
+      "offence": "speeding"
+    }
+  ]
+}
